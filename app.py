@@ -3,9 +3,23 @@ import pandas as pd
 import streamlit as st
 from dotenv import load_dotenv
 
-from src.core import normalize_columns, apply_filters, personalize_record, ensure_columns
-from src.storage import init_db, log_outreach, get_outreach_log, was_contacted
-from src.discovery_youtube import discover_youtube
+# from src.core import normalize_columns, apply_filters, personalize_record, ensure_columns
+# from src.storage import init_db, log_outreach, get_outreach_log, was_contacted
+# from src.discovery_youtube import discover_youtube
+
+try:
+    from src.core import normalize_columns, apply_filters, personalize_record, ensure_columns
+    from src.storage import init_db, log_outreach, get_outreach_log, was_contacted
+    from src.discovery_youtube import discover_youtube
+except ModuleNotFoundError as e:
+    if e.name != "src":
+        raise
+    from core import normalize_columns, apply_filters, personalize_record, ensure_columns
+    from storage import init_db, log_outreach, get_outreach_log, was_contacted
+    from discovery_youtube import discover_youtube
+
+
+
 
 load_dotenv()
 st.set_page_config(page_title="Micro-Influencer Outreach", page_icon="📣", layout="wide")
